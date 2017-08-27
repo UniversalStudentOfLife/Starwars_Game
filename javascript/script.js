@@ -48,27 +48,31 @@ $(document).ready(function(){
 
 //Global Variables
  var selectionElements = document.getElementById('selectionContainer').children;
+ //var selectionElements = document.getElementById("selectionContainer").querySelectorAll(1);
 
 	//on.click functions
 
 	$("button").on("click", function() {
 
 
-		//determin butto location
+		//determin button location
 
 			console.log($(this).parent().attr('id'));
 
 		//handles all of the characters in the "character selection" stage. moving them to the next row/section	
 		if ($(this).parent().attr('id') === "selectionContainer") {
 
+			//asign the button click to a global variable
 			selectedCharacter = this.id;
 
-			alert(selectedCharacter);
+				alert(selectedCharacter);
 
-			console.log(selectionElements);
+				console.log(selectionElements);
 
-			$("#char2Box").appendTo("#attackContainer");
-			console.log("appended button from the", $(this).parent().attr('id'), "to the attackContainer" );
+			//$("#char2Box").appendTo("#attackContainer");
+			//console.log("appended button from the", $(this).parent().attr('id'), "to the attackContainer" );
+
+			moveCharsToAttack()
 
 		}
 
@@ -79,17 +83,28 @@ $(document).ready(function(){
 		// Add function that appends all other buttons that do not equal the button pressed to the "attack container"
 		// change button's classes to "btn-danger"
 
-		/* function moveCharsToAttack () {
+		function moveCharsToAttack() {
 
-			for(var i = 0; i < selectionElements.length; i++;) {
+			console.log("made it into function moveCharsToAttack");
+			console.log(selectedCharacter);
 
-					$("#char2Box").appendTo("#attackContainer");
+			var i = selectionElements.length
+
+			while (i--) {
+
+				if( selectionElements[i].id != selectedCharacter) {
+
+						console.log(selectedCharacter);
+						console.log(selectionElements[i]);
+
+						$(selectionElements[i]).appendTo("#attackContainer");
+
+				}
 
 			}
 
-
 		} 
-*/
+
 
 
 
