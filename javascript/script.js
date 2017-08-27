@@ -1,6 +1,8 @@
 //creating character objects
 $(document).ready(function(){
 
+
+// Declaring Character Objects
 	var char1 = {
 
 		name: "Character 1",
@@ -44,18 +46,55 @@ $(document).ready(function(){
 		counter: 15,		
 	}
 
+//Global Variables
+ var selectionElements = document.getElementById('selectionContainer').children;
 
-	//onclick functions
+	//on.click functions
 
 	$("button").on("click", function() {
 
-			console.log("clicked button");
 
-			alert($(this).parent().attr('id'));
+		//determin butto location
 
-		$("#char2Box").appendTo("#attackContainer");
+			console.log($(this).parent().attr('id'));
 
-			console.log("appended button");
+		//handles all of the characters in the "character selection" stage. moving them to the next row/section	
+		if ($(this).parent().attr('id') === "selectionContainer") {
+
+			selectedCharacter = this.id;
+
+			alert(selectedCharacter);
+
+			console.log(selectionElements);
+
+			$("#char2Box").appendTo("#attackContainer");
+			console.log("appended button from the", $(this).parent().attr('id'), "to the attackContainer" );
+
+		}
+
+
+
+		//Function Section
+
+		// Add function that appends all other buttons that do not equal the button pressed to the "attack container"
+		// change button's classes to "btn-danger"
+
+		/* function moveCharsToAttack () {
+
+			for(var i = 0; i < selectionElements.length; i++;) {
+
+					$("#char2Box").appendTo("#attackContainer");
+
+			}
+
+
+		} 
+*/
+
+
+
+
+
 
 	})
 
