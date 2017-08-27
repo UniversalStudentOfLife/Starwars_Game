@@ -8,9 +8,15 @@ $(document).ready(function(){
 		attack: 10,
 		counter: 5,	
 
-		// draw/create clickable character box, maybe make it a button variable 
-		// have button/character default to character div
-		//one a character is clicked have all the other characters that were not clicked moved to the enemies row
+		/*
+		DONE - draw/create clickable character box, maybe make it a button variable 
+		have button/character default to character div
+		one a character is clicked have all the other characters that were not clicked moved to the enemies row
+		Once characters move to enemy div have them change color
+		Once character moves to defender div, have them change color again
+		create button for attack (hide it until an enemy is selected, then show, 
+		and hide again after enemy is defeted, and show when another on is selected)
+		*/
 
 	}
 
@@ -39,7 +45,19 @@ $(document).ready(function(){
 	}
 
 
+	//onclick functions
 
+	$("button").on("click", function() {
 
-}
+			console.log("clicked button");
+
+			alert($(this).parent().attr('id'));
+
+		$("#char2Box").appendTo("#attackContainer");
+
+			console.log("appended button");
+
+	})
+
+})
 

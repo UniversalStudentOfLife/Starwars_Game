@@ -18,7 +18,6 @@
 
 
 </head>
-<body>
 
 	<nav class="nav navbar-fixed-top"> 
 		<div class="container">
@@ -31,12 +30,13 @@
 
 	</nav>
 
-</body>
+
+<body>
 
 	<row id="selectionRow">
 		Character Row
 
-		<div class="col-md-12">
+		<div id="selectionContainer" class="col-md-12">
 			
 			<button type="button" id="char1Box" class="characterBox btn-default"> 
 				<div class="container">
@@ -50,9 +50,23 @@
 						</p>
 						<p> 120 </p>
 
+					</div>
+					
 
-						
-						
+				</div>
+			</button>
+
+			<button type="button" id="char2Box" class="characterBox btn-default"> 
+				<div class="container">
+
+					<div class="content">
+
+						<p> Char2 </p>
+						<p>
+							<img class="characterImage" src="images/stick_2.png">
+
+						</p>
+						<p> 120 </p>
 
 					</div>
 					
@@ -62,13 +76,12 @@
 
 
 
-
 		</div>
 	</row>
 
 	<row id="attackRow">
 		Enemies Available to Attack Row
-		<div class="col-md-12"></div>
+		<div id="attackContainer" class="col-md-12"></div>
 	</row>
 
 	<row id="fightRow">
@@ -80,5 +93,11 @@
 		Defender Row
 		<div class="col-md-12"></div>
 	</row>
+
+
+	<!--Our Script Lin-->
+	<script type="text/javascript" src="javascript/script.js"></script>
+
+</body>
 
 </html>
