@@ -2,5 +2,21 @@ body {
 
 	background-image: url("../images/StarWars.jpg");
 
+}
+
+.characterBox {
+
+
+		height: 10%;
+		width: 10%;
+		overflow: hidden;
+
+}
+
+
+.characterImage {
+
+	height: 50px;
+	width: 50px; 
 
 }
