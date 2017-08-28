@@ -94,10 +94,25 @@ $(document).ready(function(){
 
 				if( selectionElements[i].id != selectedCharacter) {
 
-						console.log(selectedCharacter);
-						console.log(selectionElements[i]);
+						//console.log(selectedCharacter);
+						//console.log(selectionElements[i]);
 
+
+						// create an empty string with a #, concat the button/char's id to the blank string so we can us it for the add class
+						// append danger class to the characters/buttons to change their color.  
+						var idString = "#";
+						var buttonId = selectionElements[i].id;
+						console.log("selection id:", selectionElements[i].id);
+						idString += buttonId; 
+						$(idString).removeClass("btn-default").addClass("btn-danger");
+
+
+						// Move character/button to the attackContainer
 						$(selectionElements[i]).appendTo("#attackContainer");
+
+						
+
+
 
 				}
 
