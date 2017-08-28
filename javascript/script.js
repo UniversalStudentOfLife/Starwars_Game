@@ -18,6 +18,7 @@ $(document).ready(function(){
 		Once character moves to defender div, have them change color again
 		create button for attack (hide it until an enemy is selected, then show, 
 		and hide again after enemy is defeted, and show when another on is selected)
+		Need to add flag to disable the character selection after choosing someone to attack
 		*/
 
 	}
@@ -48,10 +49,12 @@ $(document).ready(function(){
 
 //Global Variables
  var selectionElements = document.getElementById('selectionContainer').children;
- //var selectionElements = document.getElementById("selectionContainer").querySelectorAll(1);
+ var attackElements = document.getElementById('attackContainer').children;
 
+//======================================================================
 	//on.click functions
-
+//======================================================================
+	
 	$("button").on("click", function() {
 
 
@@ -65,7 +68,7 @@ $(document).ready(function(){
 			//asign the button click to a global variable
 			selectedCharacter = this.id;
 
-				alert(selectedCharacter);
+				//alert(selectedCharacter);
 
 				console.log(selectionElements);
 
@@ -76,9 +79,26 @@ $(document).ready(function(){
 
 		}
 
+		//handles all of the characters in the "character selection" stage. moving them to the next row/section	
+		if ($(this).parent().attr('id') === "attackContainer") {
 
+			//asign the button click to a global variable
+			selectedCharacter = this.id;
 
+				alert(selectedCharacter);
+
+				console.log(attackElements);
+
+			//$("#char2Box").appendTo("#attackContainer");
+			//console.log("appended button from the", $(this).parent().attr('id'), "to the attackContainer" );
+
+			moveEnemyToDefend()
+
+		}
+
+//=====================================================================================
 		//Function Section
+//=====================================================================================
 
 		// Add function that appends all other buttons that do not equal the button pressed to the "attack container"
 		// change button's classes to "btn-danger"
@@ -97,7 +117,6 @@ $(document).ready(function(){
 						//console.log(selectedCharacter);
 						//console.log(selectionElements[i]);
 
-
 						// create an empty string with a #, concat the button/char's id to the blank string so we can us it for the add class
 						// append danger class to the characters/buttons to change their color.  
 						var idString = "#";
@@ -110,16 +129,47 @@ $(document).ready(function(){
 						// Move character/button to the attackContainer
 						$(selectionElements[i]).appendTo("#attackContainer");
 
-						
-
-
-
 				}
 
 			}
 
 		} 
 
+
+//----------------------------------------------
+
+
+		function moveEnemyToDefend() {
+
+			console.log("made it into function moveEnemyToDefend");
+			console.log(selectedCharacter);
+
+			var i = attackElements.length
+
+			while (i--) {
+
+				if( attackElements[i].id == selectedCharacter) {
+
+						//console.log(selectedCharacter);
+						//console.log(attackElements[i]);
+
+						// create an empty string with a #, concat the button/char's id to the blank string so we can us it for the add class
+						// append danger class to the characters/buttons to change their color.  
+						var idString = "#";
+						var buttonId = attackElements[i].id;
+						console.log("selection id:", attackElements[i].id);
+						idString += buttonId; 
+						$(idString).removeClass("btn-danger").addClass("btn-default characterDefend");
+
+
+						// Move character/button to the attackContainer
+						$(attackElements[i]).appendTo("#defendContainer");
+
+				}
+
+			}
+
+		} 
 
 
 
