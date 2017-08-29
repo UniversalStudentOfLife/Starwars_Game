@@ -2,13 +2,7 @@
 $(document).ready(function(){
 
 
-// Declaring Character Objects
-	var char1 = {
 
-		name: "Character 1",
-		health: 120,
-		attack: 10,
-		counter: 5,	
 
 		/*
 		DONE - draw/create clickable character box, maybe make it a button variable 
@@ -19,10 +13,34 @@ $(document).ready(function(){
 		create button for attack (hide it until an enemy is selected, then show, 
 		and hide again after enemy is defeted, and show when another on is selected)
 		Need to add flag to disable the character selection after choosing someone to attack
+		Need to add a hide/show function for the attack button (hide when an enemy/defender hasn't been selected.)
+		Hide enemies after they die 
 		*/
+
+
+
+
+
+
+
+// Declaring Character Objects
+// Charater 1 ++++++++++++++++++++++++++++++++++++++
+	var char1 = {
+
+		name: "Character 1",
+		health: 215,
+		attack: 10,
+		counter: 5,	
+
+		updateName: function() {
+			document.getElementById("char1Name").innerText = this.name 
+		}
 
 	}
 
+
+var collection = [char1, char2, char3, char4];
+// Charater 2 ++++++++++++++++++++++++++++++++++++++
 	var char2 = {
 
 		name: "Character 2",
@@ -31,6 +49,7 @@ $(document).ready(function(){
 		counter: 2,		
 	}
 
+// Charater 3 ++++++++++++++++++++++++++++++++++++++
 	var char3 = {
 
 		name: "Character 3",
@@ -39,6 +58,7 @@ $(document).ready(function(){
 		counter: 10,	
 	}
 
+// Charater 4 ++++++++++++++++++++++++++++++++++++++
 	var char4 = {
 
 		name: "Character 4",
@@ -68,6 +88,11 @@ $(document).ready(function(){
 			//asign the button click to a global variable
 			selectedCharacter = this.id;
 
+			console.log("selected character:", selectedCharacter )
+
+			updateSelectedChar();
+
+
 				//alert(selectedCharacter);
 
 				console.log(selectionElements);
@@ -96,9 +121,64 @@ $(document).ready(function(){
 
 		}
 
+	// Handles all of the buttons in the "fightContainer". Right now the only button in there is the attack button. 
+	if ($(this).parent().attr('id') === "fightContainer") {
+
+			//asign the button click to a global variable
+			//selectedCharacter = this.id;
+
+			if (this.id === "attackButton") {
+
+					alert("Attack Button Clicked", attackButton);
+					updateSelectedChar();
+
+
+
+			}
+
+
+		}
+
+
+
 //=====================================================================================
 		//Function Section
 //=====================================================================================
+
+
+
+	function updateSelectedChar () {
+
+	    var str = "";
+	    var test ="";
+
+	    //take the selected character and turn it into a string
+	    str += selectedCharacter;
+	    console.log("str:", str);
+
+	    //now take the string and remove the "box" portion on it so we can use the "selectedCharObj" to call the object.
+	    var selectedCharObj = str.substring(0, 5);
+
+	    var index = selectedCharObj.substring(4,5);
+
+	    alert(index);
+
+	     var obj = collection[parseInt(index) -1];
+
+	     obj.updateName();
+
+	     console.log("selectedCharObj", selectedCharObj);
+
+	 //selectedCharObj.function();
+
+
+	}
+
+
+
+
+
+
 
 		// Add function that appends all other buttons that do not equal the button pressed to the "attack container"
 		// change button's classes to "btn-danger"
@@ -162,6 +242,9 @@ $(document).ready(function(){
 						$(idString).removeClass("btn-danger").addClass("btn-default characterDefend");
 
 
+						//create a variable for the defending enemy. 
+						defendingEnemy = attackElements[i];
+
 						// Move character/button to the attackContainer
 						$(attackElements[i]).appendTo("#defendContainer");
 
@@ -172,7 +255,9 @@ $(document).ready(function(){
 		} 
 
 
-
+//----------------------------------------------------------
+//		Game Battle Mechanics
+//----------------------------------------------------------
 
 
 
