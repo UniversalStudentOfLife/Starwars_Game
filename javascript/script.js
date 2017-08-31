@@ -18,11 +18,6 @@ $(document).ready(function(){
 		*/
 
 
-
-
-
-
-
 // Declaring Character Objects
 // Charater 1 ++++++++++++++++++++++++++++++++++++++
 	var char1 = {
@@ -34,12 +29,15 @@ $(document).ready(function(){
 
 		updateName: function() {
 			document.getElementById("char1Name").innerText = this.name 
+		},
+
+		updateHealth: function() {
+			document.getElementById("char1Health").innerText = this.health 
 		}
+
 
 	}
 
-
-var collection = [char1, char2, char3, char4];
 // Charater 2 ++++++++++++++++++++++++++++++++++++++
 	var char2 = {
 
@@ -47,6 +45,14 @@ var collection = [char1, char2, char3, char4];
 		health: 100,
 		attack: 5,
 		counter: 2,		
+
+		updateName: function() {
+			document.getElementById("char2Name").innerText = this.name 
+		},
+
+		updateHealth: function() {
+			document.getElementById("char2Health").innerText = this.health 
+		}
 	}
 
 // Charater 3 ++++++++++++++++++++++++++++++++++++++
@@ -56,6 +62,15 @@ var collection = [char1, char2, char3, char4];
 		health: 150,
 		attack: 15,	
 		counter: 10,	
+
+		updateName: function() {
+				document.getElementById("char3Name").innerText = this.name 
+			},
+
+		updateHealth: function() {
+				document.getElementById("char3Health").innerText = this.health 
+			}
+
 	}
 
 // Charater 4 ++++++++++++++++++++++++++++++++++++++
@@ -64,8 +79,19 @@ var collection = [char1, char2, char3, char4];
 		name: "Character 4",
 		health: 180,
 		attack: 20,
-		counter: 15,		
+		counter: 15,	
+
+		updateName: function() {
+				document.getElementById("char4Name").innerText = this.name 
+			},
+
+		updateHealth: function() {
+				document.getElementById("char4Health").innerText = this.health 
+			}	
 	}
+
+
+var collection = [char1, char2, char3, char4];
 
 //Global Variables
  var selectionElements = document.getElementById('selectionContainer').children;
@@ -87,8 +113,7 @@ var collection = [char1, char2, char3, char4];
 
 			//asign the button click to a global variable
 			selectedCharacter = this.id;
-
-			console.log("selected character:", selectedCharacter )
+				console.log("selected character:", selectedCharacter);
 
 			updateSelectedChar();
 
@@ -108,16 +133,20 @@ var collection = [char1, char2, char3, char4];
 		if ($(this).parent().attr('id') === "attackContainer") {
 
 			//asign the button click to a global variable
-			selectedCharacter = this.id;
+			selectedEnemy = this.id;
 
-				alert(selectedCharacter);
+
+				alert(selectedEnemy);
 
 				console.log(attackElements);
+
+			updateEnemyChar();
 
 			//$("#char2Box").appendTo("#attackContainer");
 			//console.log("appended button from the", $(this).parent().attr('id'), "to the attackContainer" );
 
 			moveEnemyToDefend()
+
 
 		}
 
@@ -130,9 +159,10 @@ var collection = [char1, char2, char3, char4];
 			if (this.id === "attackButton") {
 
 					alert("Attack Button Clicked", attackButton);
-					updateSelectedChar();
 
+					//alert("Char1 attack:", selectedCharacter.attack);
 
+						battleCalculations();
 
 			}
 
@@ -142,18 +172,18 @@ var collection = [char1, char2, char3, char4];
 
 
 //=====================================================================================
-		//Function Section
+//General Function Section
 //=====================================================================================
 
 
 
-	function updateSelectedChar () {
+	function updateSelectedChar() {
 
 	    var str = "";
 	    var test ="";
 
 	    //take the selected character and turn it into a string
-	    str += selectedCharacter;
+	     str += selectedCharacter;
 	    console.log("str:", str);
 
 	    //now take the string and remove the "box" portion on it so we can use the "selectedCharObj" to call the object.
@@ -165,18 +195,62 @@ var collection = [char1, char2, char3, char4];
 
 	     var obj = collection[parseInt(index) -1];
 
-	     obj.updateName();
+	     	console.log("selectedCharObj", selectedCharObj);
 
-	     console.log("selectedCharObj", selectedCharObj);
+	     obj.updateName();
+	     obj.updateHealth();
+
+
+	     	console.log("SelectedChar Attack:", obj["attack"]);
+
+	    var selectedCharAttack = obj["attack"];
+	     	console.log("selectedCharAttack", obj["attack"]);     	
 
 	 //selectedCharObj.function();
 
+	}
+
+
+//-------------------------------------------------------------
+
+
+
+	function updateEnemyChar () {
+
+	    var str = "";
+	    var test ="";
+
+	    //take the selected character and turn it into a string
+	     str += selectedEnemy;
+	    console.log("str:", str);
+
+	    //now take the string and remove the "box" portion on it so we can use the "selectedCharObj" to call the object.
+	    var selectedCharObj = str.substring(0, 5);
+
+	    var index = selectedCharObj.substring(4,5);
+
+	    alert(index);
+
+	     var obj = collection[parseInt(index) -1];
+
+	     	console.log("selectedCharObj", selectedCharObj);
+
+	     obj.updateName();
+	     obj.updateHealth();
+
+
+	     	console.log("SelectedChar Attack:", obj["attack"]);
+
+	    var selectedCharAttack = obj["attack"];
+	     	console.log("selectedCharAttack", obj["attack"]);     	
+
+	 //selectedCharObj.function();
 
 	}
 
 
 
-
+//--------------------------------------------------------------
 
 
 
@@ -222,13 +296,13 @@ var collection = [char1, char2, char3, char4];
 		function moveEnemyToDefend() {
 
 			console.log("made it into function moveEnemyToDefend");
-			console.log(selectedCharacter);
+			console.log(selectedEnemy);
 
 			var i = attackElements.length
 
 			while (i--) {
 
-				if( attackElements[i].id == selectedCharacter) {
+				if( attackElements[i].id == selectedEnemy) {
 
 						//console.log(selectedCharacter);
 						//console.log(attackElements[i]);
@@ -258,6 +332,22 @@ var collection = [char1, char2, char3, char4];
 //----------------------------------------------------------
 //		Game Battle Mechanics
 //----------------------------------------------------------
+
+
+function battleCalculations() {
+
+
+}	
+
+
+
+
+
+
+
+
+
+
 
 
 
