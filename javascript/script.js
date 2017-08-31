@@ -179,8 +179,16 @@ var collection = [char1, char2, char3, char4];
 
 	function updateSelectedChar() {
 
+
 	    var str = "";
 	    var test ="";
+
+	     // we want this unconcatinated string to hide the enemy after they die. 
+	    glbCharStringId = "#";
+	    glbCharStringId += selectedCharacter;
+
+	    // lock in the user's selection
+	    $('#char1Box').prop('disabled', true);
 
 	    //take the selected character and turn it into a string
 	     str += selectedCharacter;
@@ -326,6 +334,9 @@ var collection = [char1, char2, char3, char4];
 
 			}
 
+			//disable the other enemies until the current one dies.
+			$('#attackContainer').children().prop('disabled', true);
+
 		} 
 
 
@@ -365,14 +376,15 @@ function battleCalculations() {
 			// Enemy has died, hide them. 
 			$(glbEnemyStringId).hide();
 
+			// unlock the remaining enemies to allow the user to pick the next one they would like to fight.
+			$('#attackContainer').children().prop('disabled', false);
+
 	} else {
 
 		// User damage calculation to the enemy. 
 		document.getElementById(enemyConcatString + "Health").innerText -= charObj["attack"];
 			console.log("selectedCharAttack", charObj["attack"]); 
 		}
-
-
 
 
 
