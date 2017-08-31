@@ -217,8 +217,14 @@ var collection = [char1, char2, char3, char4];
 	    var str = "";
 	    var test ="";
 
+	    // we want this unconcatinated string to hide the enemy after they die. 
+	    glbEnemyStringId = "#";
+	    glbEnemyStringId += selectedEnemy;
+
 	    //take the selected character and turn it into a string
 	     str += selectedEnemy;
+
+
 	    console.log("str:", str);
 
 	    //now take the string and remove the "box" portion on it so we can use the "selectedCharObj" to call the object.
@@ -355,6 +361,9 @@ function battleCalculations() {
 
 			alert("You Beat Them! :-)");
 			alert("Do it again!");
+
+			// Enemy has died, hide them. 
+			$(glbEnemyStringId).hide();
 
 	} else {
 
