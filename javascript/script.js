@@ -3,7 +3,6 @@ $(document).ready(function(){
 
 
 
-
 		/*
 		DONE - draw/create clickable character box, maybe make it a button variable 
 		have button/character default to character div
@@ -91,14 +90,22 @@ $(document).ready(function(){
 	}
 
 
-var collection = [char1, char2, char3, char4];
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// Global Variables (Note: there are additional global variables in the "update" functions)
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-//Global Variables
+ var collection = [char1, char2, char3, char4];
  var selectionElements = document.getElementById('selectionContainer').children;
  var attackElements = document.getElementById('attackContainer').children;
 
+// things to hide.
+$("#attackButton").hide();
+	
+
+
+
 //======================================================================
-	//on.click functions
+	//on.click functions (Handles all of the button clicks.)
 //======================================================================
 	
 	$("button").on("click", function() {
@@ -117,16 +124,7 @@ var collection = [char1, char2, char3, char4];
 
 			updateSelectedChar();
 
-
-				//alert(selectedCharacter);
-
-				console.log(selectionElements);
-
-			//$("#char2Box").appendTo("#attackContainer");
-			//console.log("appended button from the", $(this).parent().attr('id'), "to the attackContainer" );
-
-			moveCharsToAttack()
-
+			moveCharsToAttack();
 		}
 
 		//handles all of the characters in the "character selection" stage. moving them to the next row/section	
@@ -135,17 +133,12 @@ var collection = [char1, char2, char3, char4];
 			//asign the button click to a global variable
 			selectedEnemy = this.id;
 
-
-				alert(selectedEnemy);
-
-				console.log(attackElements);
-
 			updateEnemyChar();
 
-			//$("#char2Box").appendTo("#attackContainer");
-			//console.log("appended button from the", $(this).parent().attr('id'), "to the attackContainer" );
-
 			moveEnemyToDefend()
+
+			//unhide the attack button
+			$("#attackButton").show();
 
 
 		}
@@ -169,13 +162,9 @@ var collection = [char1, char2, char3, char4];
 
 		}
 
-
-
 //=====================================================================================
 //General Function Section
 //=====================================================================================
-
-
 
 	function updateSelectedChar() {
 
@@ -215,10 +204,7 @@ var collection = [char1, char2, char3, char4];
 
 	}
 
-
 //-------------------------------------------------------------
-
-
 
 	function updateEnemyChar () {
 
@@ -256,11 +242,7 @@ var collection = [char1, char2, char3, char4];
 
 	}
 
-
-
 //--------------------------------------------------------------
-
-
 
 		// Add function that appends all other buttons that do not equal the button pressed to the "attack container"
 		// change button's classes to "btn-danger"
@@ -297,9 +279,7 @@ var collection = [char1, char2, char3, char4];
 
 		} 
 
-
 //----------------------------------------------
-
 
 		function moveEnemyToDefend() {
 
@@ -336,6 +316,7 @@ var collection = [char1, char2, char3, char4];
 
 			//disable the other enemies until the current one dies.
 			$('#attackContainer').children().prop('disabled', true);
+			$('#defendContainer').children().prop('disabled', true);
 
 		} 
 
@@ -344,11 +325,14 @@ var collection = [char1, char2, char3, char4];
 //		Game Battle Mechanics
 //----------------------------------------------------------
 
+characterAttackDamage = ++charObj["attack"];
+
+
 // perform all of the battle calculations in this div (e.g. health subtraction for both characters and attack increase for the user/selectedChar)
 function battleCalculations() {
 
 
-	alert("Made it in Battle Calcs!");
+	//alert("Made it in Battle Calcs!");
 
 
 	// check the health of the user to determine what action to take.
@@ -373,8 +357,14 @@ function battleCalculations() {
 			alert("You Beat Them! :-)");
 			alert("Do it again!");
 
-			// Enemy has died, hide them. 
+			//reset health 
+			charObj.updateHealth();
+
+			// Enemy has died, hide them and the attack button. 
 			$(glbEnemyStringId).hide();
+			$("#attackButton").hide();
+
+
 
 			// unlock the remaining enemies to allow the user to pick the next one they would like to fight.
 			$('#attackContainer').children().prop('disabled', false);
@@ -382,8 +372,13 @@ function battleCalculations() {
 	} else {
 
 		// User damage calculation to the enemy. 
-		document.getElementById(enemyConcatString + "Health").innerText -= charObj["attack"];
-			console.log("selectedCharAttack", charObj["attack"]); 
+
+		
+
+		//characterAttackDamage ++ 5;
+
+		document.getElementById(enemyConcatString + "Health").innerText -= characterAttackDamage;
+			console.log("selectedCharAttack", characterAttackDamage); 
 		}
 
 
