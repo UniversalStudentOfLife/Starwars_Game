@@ -193,18 +193,15 @@ var collection = [char1, char2, char3, char4];
 
 	    alert(index);
 
-	     var obj = collection[parseInt(index) -1];
+	     var charObj = collection[parseInt(index) -1];
 
 	     	console.log("selectedCharObj", selectedCharObj);
 
-	     obj.updateName();
-	     obj.updateHealth();
+	     charObj.updateName();
+	     charObj.updateHealth();
 
-
-	     	console.log("SelectedChar Attack:", obj["attack"]);
-
-	    var selectedCharAttack = obj["attack"];
-	     	console.log("selectedCharAttack", obj["attack"]);     	
+	    selectedCharAttack = charObj["attack"];
+	     	console.log("selectedCharAttack", charObj["attack"]);     	
 
 	 //selectedCharObj.function();
 
@@ -229,20 +226,17 @@ var collection = [char1, char2, char3, char4];
 
 	    var index = selectedCharObj.substring(4,5);
 
-	    alert(index);
+	    //alert(index);
 
-	     var obj = collection[parseInt(index) -1];
+	      enemyObj = collection[parseInt(index) -1];
 
 	     	console.log("selectedCharObj", selectedCharObj);
 
-	     obj.updateName();
-	     obj.updateHealth();
+	     enemyObj.updateName();
+	     enemyObj.updateHealth();
 
-
-	     	console.log("SelectedChar Attack:", obj["attack"]);
-
-	    var selectedCharAttack = obj["attack"];
-	     	console.log("selectedCharAttack", obj["attack"]);     	
+	     enemyCharAttack = enemyObj["attack"];
+	     	console.log("enemyCharAttack", enemyObj["attack"]);     	
 
 	 //selectedCharObj.function();
 
@@ -336,6 +330,11 @@ var collection = [char1, char2, char3, char4];
 
 function battleCalculations() {
 
+
+	alert("Made it in Battle Calcs!");
+
+	document.getElementById("char1Health").innerText -= enemyObj["attack"];
+	console.log("enemyCharAttack", enemyObj["attack"]); 
 
 }	
 
