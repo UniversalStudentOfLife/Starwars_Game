@@ -333,14 +333,39 @@ function battleCalculations() {
 
 	alert("Made it in Battle Calcs!");
 
-	//enemy damage calculation to user/selectedChar.
-	document.getElementById(selectedCharConcatString + "Health").innerText -= enemyObj["attack"];
+
+	// check the health of the user to determine what action to take.
+	if (document.getElementById(selectedCharConcatString + "Health").innerText <= 0) {
+
+		alert("You died... :-(");
+		alert("Try again!");
+
+	} else {
+
+		//enemy damage calculation to user/selectedChar.
+		document.getElementById(selectedCharConcatString + "Health").innerText -= enemyObj["attack"];
 		console.log("enemyCharAttack", enemyObj["attack"]); 
 
+	}
 
-	// User damage calculation to the enemy. 
-	document.getElementById(enemyConcatString + "Health").innerText -= charObj["attack"];
-		console.log("selectedCharAttack", charObj["attack"]); 
+
+
+	// Check the health of the enemy to determine the action to take.
+	if (document.getElementById(enemyConcatString + "Health").innerText <= 0) {
+
+			alert("You Beat Them! :-)");
+			alert("Do it again!");
+
+	} else {
+
+		// User damage calculation to the enemy. 
+		document.getElementById(enemyConcatString + "Health").innerText -= charObj["attack"];
+			console.log("selectedCharAttack", charObj["attack"]); 
+		}
+
+
+
+
 
 }	
 
