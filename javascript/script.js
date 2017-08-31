@@ -187,15 +187,15 @@ var collection = [char1, char2, char3, char4];
 	    console.log("str:", str);
 
 	    //now take the string and remove the "box" portion on it so we can use the "selectedCharObj" to call the object.
-	    var selectedCharObj = str.substring(0, 5);
+	     selectedCharConcatString = str.substring(0, 5);
 
-	    var index = selectedCharObj.substring(4,5);
+	    var index = selectedCharConcatString.substring(4,5);
 
 	    alert(index);
 
-	     var charObj = collection[parseInt(index) -1];
+	      charObj = collection[parseInt(index) -1];
 
-	     	console.log("selectedCharObj", selectedCharObj);
+	     	console.log("selectedCharObj", selectedCharConcatString);
 
 	     charObj.updateName();
 	     charObj.updateHealth();
@@ -222,15 +222,15 @@ var collection = [char1, char2, char3, char4];
 	    console.log("str:", str);
 
 	    //now take the string and remove the "box" portion on it so we can use the "selectedCharObj" to call the object.
-	    var selectedCharObj = str.substring(0, 5);
+	     enemyConcatString = str.substring(0, 5);
 
-	    var index = selectedCharObj.substring(4,5);
+	    var index = enemyConcatString.substring(4,5);
 
 	    //alert(index);
 
 	      enemyObj = collection[parseInt(index) -1];
 
-	     	console.log("selectedCharObj", selectedCharObj);
+	     	console.log("selectedCharObj", enemyConcatString);
 
 	     enemyObj.updateName();
 	     enemyObj.updateHealth();
@@ -327,14 +327,20 @@ var collection = [char1, char2, char3, char4];
 //		Game Battle Mechanics
 //----------------------------------------------------------
 
-
+// perform all of the battle calculations in this div (e.g. health subtraction for both characters and attack increase for the user/selectedChar)
 function battleCalculations() {
 
 
 	alert("Made it in Battle Calcs!");
 
-	document.getElementById("char1Health").innerText -= enemyObj["attack"];
-	console.log("enemyCharAttack", enemyObj["attack"]); 
+	//enemy damage calculation to user/selectedChar.
+	document.getElementById(selectedCharConcatString + "Health").innerText -= enemyObj["attack"];
+		console.log("enemyCharAttack", enemyObj["attack"]); 
+
+
+	// User damage calculation to the enemy. 
+	document.getElementById(enemyConcatString + "Health").innerText -= charObj["attack"];
+		console.log("selectedCharAttack", charObj["attack"]); 
 
 }	
 
