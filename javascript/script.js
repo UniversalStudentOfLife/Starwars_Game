@@ -177,7 +177,7 @@ $("#attackButton").hide();
 	    glbCharStringId += selectedCharacter;
 
 	    // lock in the user's selection
-	    $('#char1Box').prop('disabled', true);
+	    $(glbCharStringId).prop('disabled', true);
 
 	    //take the selected character and turn it into a string
 	     str += selectedCharacter;
@@ -188,7 +188,7 @@ $("#attackButton").hide();
 
 	    var index = selectedCharConcatString.substring(4,5);
 
-	    alert(index);
+	   //alert(index);
 
 	      charObj = collection[parseInt(index) -1];
 
