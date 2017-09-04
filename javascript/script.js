@@ -125,7 +125,7 @@ $("#attackButton").hide();
 			updateSelectedChar();
 
 			moveCharsToAttack();
-		}
+		}	
 
 		//handles all of the characters in the "character selection" stage. moving them to the next row/section	
 		if ($(this).parent().attr('id') === "attackContainer") {
@@ -151,7 +151,7 @@ $("#attackButton").hide();
 
 			if (this.id === "attackButton") {
 
-					alert("Attack Button Clicked", attackButton);
+					//alert("Attack Button Clicked", attackButton);
 
 					//alert("Char1 attack:", selectedCharacter.attack);
 
